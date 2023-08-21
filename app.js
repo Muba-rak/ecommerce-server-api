@@ -6,11 +6,15 @@ const cookieparser = require("cookie-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const authRouter = require("./routes/authRoutes");
 
 //middleware
 app.use(cors());
 app.use(morgan("tiny"));
 app.use(express.json());
+
+//routes
+app.use("/api/v1/auth", authRouter);
 
 app.get("/", (req, res) => {
   res.send("E-commerce API");

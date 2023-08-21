@@ -7,16 +7,20 @@ const morgan = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/authRoutes");
+const userRouter = require("./routes/userRoutes");
 
 //middleware
 app.use(cors());
 app.use(morgan("tiny"));
 app.use(express.json());
+app.use(cookieparser(process.env.JWT_SECRET));
 
 //routes
 app.use("/api/v1/auth", authRouter);
-
+app.use("/api/v1/users", userRouter);
 app.get("/", (req, res) => {
+  // console.log(req.cookies);
+  // console.log(req.signedCookies);
   res.send("E-commerce API");
 });
 

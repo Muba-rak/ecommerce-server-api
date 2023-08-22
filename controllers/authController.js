@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const handleError = require("../errors/handleerrors");
 const { attachCookieToResponse } = require("../utils/jwt");
+const createTokenUser = require("../utils/createTokenUser");
 const register = async (req, res) => {
   const { role, name, email, password } = req.body;
   try {
@@ -9,11 +10,7 @@ const register = async (req, res) => {
     const role = isFirstAccount ? "admin" : "user";
 
     const user = await User.create({ name, email, password, role });
-    const tokenUser = {
-      userId: user._id,
-      name: user.name,
-      role: user.role,
-    };
+    const tokenUser = createTokenUser(user);
     attachCookieToResponse({ res, user: tokenUser });
     res.status(201).json({
       user: { userId: user._id, name: user.name, role: user.role },
@@ -39,11 +36,7 @@ const login = async (req, res) => {
     if (!isCorrect) {
       throw Error("wrong");
     }
-    const tokenUser = {
-      userId: user._id,
-      name: user.name,
-      role: user.role,
-    };
+    const tokenUser = createTokenUser(user);
     attachCookieToResponse({ res, user: tokenUser });
     res.status(201).json({
       user: { userId: user._id, name: user.name, role: user.role },

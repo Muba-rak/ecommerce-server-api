@@ -4,6 +4,10 @@ const handleErrors = (err) => {
     err.message = "Please Fill all input fields";
     return { error: err.message };
   }
+  if (err.message === "no match") {
+    err.message = "Invalid Credentials";
+    return { error: err.message };
+  }
   if (err.message === "no user") {
     errors.email = "Email adrress is not registered";
     return errors;

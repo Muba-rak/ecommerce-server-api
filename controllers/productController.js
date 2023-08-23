@@ -15,7 +15,7 @@ const getAllProducts = async (req, res) => {
 };
 const getSingleProduct = async (req, res) => {
   const { productId } = req.params;
-  const product = await Product.findOne({ _id: productId });
+  const product = await Product.findOne({ _id: productId }).populate("reviews");
   res.status(200).json(product);
 };
 const updateProduct = async (req, res) => {

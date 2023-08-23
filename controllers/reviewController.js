@@ -27,12 +27,22 @@ const createReview = async (req, res) => {
   res.status(201).json(review);
 };
 const getAllReviews = async (req, res) => {
-  const reviews = await Review.find();
+  const reviews = await Review.find()
+    .populate({
+      path: "product",
+      select: "company price name",
+    })
+    .populate("user", "name email");
   res.status(200).json(reviews);
 };
 const getSingleReview = async (req, res) => {
   const { reviewId } = req.params;
-  const review = await Review.findOne({ _id: reviewId });
+  const review = await Review.findOne({ _id: reviewId })
+    .populate({
+      path: "product",
+      select: "company price name",
+    })
+    .populate("user", "name email");
   res.status(200).json({ review });
 };
 const updateReview = async (req, res) => {

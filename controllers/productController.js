@@ -29,7 +29,7 @@ const updateProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   const { productId } = req.params;
   const product = await Product.findOne({ _id: productId });
-  await product.remove();
+  await product.deleteOne();
   res.status(200).json({ msg: "success, product removed" });
 };
 const uploadImage = async (req, res) => {

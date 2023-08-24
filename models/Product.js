@@ -57,7 +57,10 @@ const productSchema = new Schema(
     averageRating: {
       type: Number,
       default: 0,
-      required: true,
+    },
+    numOfReviews: {
+      type: Number,
+      default: 0,
     },
     user: {
       type: mongoose.Types.ObjectId,

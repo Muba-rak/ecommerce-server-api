@@ -21,6 +21,8 @@ const register = async (req, res) => {
     res.status(400).json(errors);
   }
 };
+
+//login controller
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {

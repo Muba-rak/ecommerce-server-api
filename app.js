@@ -12,6 +12,8 @@ const productRouter = require("./routes/productRoutes");
 const reviewRouter = require("./routes/reviewRoutes");
 const orderRouter = require("./routes/orderRoutes");
 
+app.use(express.static("./public"));
+
 //middleware
 app.use(cors());
 // app.use(morgan("tiny"));
@@ -25,11 +27,11 @@ app.use("/api/v1/products", productRouter);
 app.use("/api/v1/reviews", reviewRouter);
 app.use("/api/v1/orders", orderRouter);
 
-app.get("/", (req, res) => {
-  // console.log(req.cookies);
-  // console.log(req.signedCookies);
-  res.send("E-commerce API");
-});
+// app.get("/", (req, res) => {
+//   // console.log(req.cookies);
+//   // console.log(req.signedCookies);
+//   res.send("E-commerce API");
+// });
 
 const start = async () => {
   try {

@@ -14,7 +14,7 @@ const orderRouter = require("./routes/orderRoutes");
 
 //middleware
 app.use(cors());
-app.use(morgan("tiny"));
+// app.use(morgan("tiny"));
 app.use(express.json());
 app.use(cookieparser(process.env.JWT_SECRET));
 
